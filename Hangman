@@ -1,0 +1,79 @@
+# Write your code here
+import random
+
+def start():
+    guessing(correct_word)
+    
+def hidden_word(word):
+    lenght = len(word)
+    string = ""
+    for index in range(lenght):
+        string += "-"
+    return string
+    
+def guessing(right_word):
+    secret = hidden_word(right_word)
+    number_of_tries = 8
+    i = 0
+    secret_list = list(secret)
+    guess_chars=""
+    
+    while i < 8:
+        print("") 
+        print(listToString(secret_list))
+        guess_char =input(f"Input a letter: ")
+        
+        
+#Checks for single letter
+        if len(guess_char) != 1:
+            print("You should input a single letter")
+#Checks for lowercase
+        elif guess_char.islower()==False:
+            print("Please enter a lowercase English letter")
+#Checks if user already entered this letter
+        elif guess_char in guess_chars:
+            print("You've already guessed this letter")
+        elif guess_char in right_word:
+            index = right_word.index(guess_char)
+            secret_list[index] = guess_char                      
+        else:
+            print("That letter doesn't appear in the word")
+ 
+            i += 1
+        if len(guess_char) == 1:
+            guess_chars+=guess_char
+    win_or_lose(listToString(secret_list))
+
+#Function to check if win or lost
+def win_or_lose(secret_word):
+    
+    if secret_word == correct_word:
+        print("""You guessed the word!
+                You survived!""")
+    else:
+        print("You lost!")
+ 
+# Function to convert   
+def listToString(s):  
+    
+    # initialize an empty string 
+    str1 = ""  
+    
+    # traverse in the string   
+    for ele in s:  
+        str1 += ele   
+    
+    # return string   
+    return str1 
+       
+
+print("H A N G M A N")
+print("")
+words = ('python', 'java', 'kotlin', 'javascript')
+correct_word_num = random.randint(0, 3)
+correct_word = words[correct_word_num]
+
+
+   
+start()
+
